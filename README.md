@@ -23,8 +23,8 @@ Account : 20 Bytes Ethereum account starting with '0x'
     decimal : Number,
   },
   sale : {
-    max_cap : String,
-    min_cap : String,
+    max_cap : Number, // decimal considered
+    min_cap : Number, // decimal considered
     start_time : Time,
     end_time : Time,
     rate: {
@@ -39,7 +39,7 @@ Account : 20 Bytes Ethereum account starting with '0x'
     },
     distribution: {
       token : [ { account: String | Account, ratio : Number } ], // index 0 for { account: 'crowdsale', ratio: 80% }
-      ether : [ { account: String, ratio : Number } ]
+      ether : [ { account: Account, ratio : Number } ]
     },
     valid_purchase: {
       max_purchase_limit : Number, // ( 0 for no limit )
@@ -49,11 +49,11 @@ Account : 20 Bytes Ethereum account starting with '0x'
       use_kyc : Boolean,
       kyc_for_presale : Boolean
     }
-    new_token_owner : String,
+    new_token_owner : Account,
     multisig : {
       multisig_use : Boolean,
       num_multisig : Number,
-      multisig_owner : [ String ]
+      multisig_owner : [ Account ]
     }
   },
   locker : {
@@ -63,7 +63,7 @@ Account : 20 Bytes Ethereum account starting with '0x'
       {
         no_vesting : Boolean,
         vesting : [ { vesting_stage: Time, vesting_amount: Number } ],
-        distribution: [ { account: Strubg, ratio: Number } ]    
+        distribution: [ { account: String, ratio: Number } ]    
       }
     ]
   }
