@@ -38,7 +38,7 @@ Account : 20 Bytes Ethereum account starting with '0x'
       }
     },
     distribution: {
-      token : [ { account: String | Account, ratio : Number } ], // index 0 for { account: 'crowdsale', ratio: 80% }
+      token : [ { account: String | Account, ratio : Number } ], // index 0 for { account: 'crowdsale', ratio: 0.80 }
       ether : [ { account: Account, ratio : Number } ]
     },
     valid_purchase: {
@@ -58,10 +58,10 @@ Account : 20 Bytes Ethereum account starting with '0x'
   },
   locker : {
     use_locker : Boolean,
-    num_lockers : Number,
+    num_locker : Number,
     locker_options : [
       {
-        no_vesting : Boolean,
+        no_vesting : Boolean, // just lock tokens
         vesting : [ { vesting_stage: Time, vesting_amount: Number } ],
         distribution: [ { account: String, ratio: Number } ]    
       }
