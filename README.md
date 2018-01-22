@@ -46,7 +46,7 @@ Account : 20 Bytes Ethereum account starting with '0x'
       min_purchase_limit : Number  // ( 0 for no limit )
     },
     kyc: {
-      use_kyc : Boolean,
+      kyc_for_mainsale : Boolean,
       kyc_for_presale : Boolean
     }
     new_token_owner : Account,
