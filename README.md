@@ -1,3 +1,6 @@
+[](https://secure.travis-ci.org/Onther-Tech/tokyo-schema.png?branch=master,staging,production)
+
+
 ### Types
 Time : Human readable string without time zone considered (UTC). Only support `MM/DD/YYYY HH:mm` format by moment.js. See [details](http://momentjs.com/docs/#/parsing/string-format/)
 - eg) 01/21/2018 09:30
