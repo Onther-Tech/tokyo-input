@@ -33,13 +33,13 @@ Account : 20 Bytes Ethereum account starting with '0x'
       bonus: { // only required for dynamic bonus
         use_time_bonus : Boolean,
         use_amount_bonus : Boolean,
-        time_bonuses : [ { bonus_time_stage: Time, bonus_ratio: Number } ],
-        amount_bonuses : [ { bonus_amount_stage: Number, bonus_ratio: Number } ]
+        time_bonuses : [ { bonus_time_stage: Time, bonus_time_ratio: Number } ],
+        amount_bonuses : [ { bonus_amount_stage: Number, bonus_amount_ratio: Number } ]
       }
     },
     distribution: {
-      token : [ { account: String | Account, ratio : Number } ], // index 0 for { account: 'crowdsale', ratio: 0.80 }
-      ether : [ { account: Account, ratio : Number } ]
+      token : [ { token_holder: String | Account, token_ratio : Number } ], // index 0 for { account: 'crowdsale', ratio: 0.80 }
+      ether : [ { ether_holder: Account, ether_ratio : Number } ]
     },
     valid_purchase: {
       max_purchase_limit : Number, // ( 0 for no limit )
