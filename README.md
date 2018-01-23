@@ -1,4 +1,4 @@
-[](https://secure.travis-ci.org/Onther-Tech/tokyo-schema.png?branch=master,staging,production)
+![Build](https://secure.travis-ci.org/Onther-Tech/tokyo-schema.png?branch=master,staging,production)
 
 
 ### Types
