@@ -75,13 +75,13 @@ module.exports = Joi.object().keys({
     num_locker: Joi.number().min(0).required(),
     locker_options: Joi.array().items(
       Joi.object().keys({
-        no_vesting: Joi.bool().required(),
-        vesting: Joi.array().items(
+        is_straight: Joi.bool().required(),
+        release: Joi.array().items(
           Joi.object().keys({
-            vesting_stage: Time().required(),
-            vesting_amount: Joi.number().required(),
+            release_time: Time().required(),
+            release_ratio: Joi.number().required(),
           }),
-        ),
+        ).required(),
         distribution: Joi.array().items(
           Joi.object().keys({
             account: Joi.string().required(),

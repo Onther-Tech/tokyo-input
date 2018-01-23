@@ -63,11 +63,11 @@
     "num_locker" : 2,
     "locker_options" : [
       {
-        "no_vesting" : false,
-        "vesting" : [
-          { "vesting_stage": "01/27/2018 00:00", "vesting_amount": 20 },
-          { "vesting_stage": "01/28/2018 00:00", "vesting_amount": 30 },
-          { "vesting_stage": "01/30/2018 00:00", "vesting_amount": 50 }
+        "is_straight" : false,
+        "release" : [
+          { "release_time": "01/27/2018 00:00", "release_ratio": 20 },
+          { "release_time": "01/28/2018 00:00", "release_ratio": 30 },
+          { "release_time": "01/30/2018 00:00", "release_ratio": 50 }
         ],
         "distribution": [
           { "account": "0x557678cf28594495ef4b08a6447726f931f8d787", "ratio": 100 }
@@ -75,7 +75,10 @@
         "ratio": 20
       },
       {
-        "no_vesting" : true,
+        "is_straight" : false,
+        "release" : [
+          { "release_time": "01/30/2018 00:00", "release_ratio": 100 }
+        ],
         "distribution": [
           { "account": "0x557678cf28594495ef4b08a6447726f931f8d787", "ratio": 50 },
           { "account": "0x557678cf28594495ef4b08a6447726f931f8d788", "ratio": 50 }

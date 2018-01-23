@@ -2,7 +2,7 @@
 Time : Human readable string without time zone considered (UTC). Only support `MM/DD/YYYY HH:mm` format by moment.js. See [details](http://momentjs.com/docs/#/parsing/string-format/)
 - eg) 01/21/2018 09:30
 
-Account : 20 Bytes Ethereum account starting with '0x'
+Account : 20 Bytes Ethereum account starting with "0x"
 - eg) 0x5a0b54d5dc17e0aadc383d2db43b0a0d3e029c4c
 
 ### Schema
@@ -12,10 +12,10 @@ Account : 20 Bytes Ethereum account starting with '0x'
   token : {
     token_type : {
       is_minime : Boolean,
-      token_option : { // only required for MiniMe
+      token_option : {
         burnable : Boolean,
         pausable : Boolean,
-        vesting : Boolean,
+        vesting : Boolean, // only required for MiniMe
       }
     },
     token_name : String,
@@ -38,7 +38,7 @@ Account : 20 Bytes Ethereum account starting with '0x'
       }
     },
     distribution: {
-      token : [ { token_holder: "crowdsale" | "locker" | Account, token_ratio : Number } ], // index 0 for { account: 'crowdsale', ratio: 0.80 }
+      token : [ { token_holder: "crowdsale" | "locker" | Account, token_ratio : Number } ], // index 0 item must be { account: "crowdsale", ratio: 0.80 }
       ether : [ { ether_holder: Account, ether_ratio : Number } ]
     },
     valid_purchase: {
@@ -61,11 +61,12 @@ Account : 20 Bytes Ethereum account starting with '0x'
     num_locker : Number,
     locker_options : [
       {
-        is_straight : Boolean, // locker_type : straight, variable
-        locking : [ { locking_stage: Time, locking_ratio: Number } ], //only take 1 for straight vesting locker (cliff time & ratio)
+        is_straight : Boolean, // locking type : straight, variable
+        release : [ { relase_time: Time, release_ratio: Number } ], // A single release for simple locker (release time & 100% ratio)
         distribution: [ { account: String, ratio: Number } ]
       }
-    ]
+    ],
+    ratio: Number // The ratio designated to this locker
   }
 }
 ```
