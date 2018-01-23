@@ -1,11 +1,11 @@
 ### Types
-Time : Human readable string, parsed by [this api](https://momentjs.com/docs/#/parsing/string/). No time zone considered (UTC)
-- eg) 2013-02-08 09:30
+Time : Human readable string without time zone considered (UTC). Only support `MM/DD/YYYY HH:mm` format by moment.js. See [details](http://momentjs.com/docs/#/parsing/string-format/)
+- eg) 01/21/2018 09:30
 
 Account : 20 Bytes Ethereum account starting with '0x'
 - eg) 0x5a0b54d5dc17e0aadc383d2db43b0a0d3e029c4c
 
-### Input Scheme
+### Input Schema
 
 ```
 {
@@ -48,7 +48,7 @@ Account : 20 Bytes Ethereum account starting with '0x'
     kyc: {
       kyc_for_mainsale : Boolean,
       kyc_for_presale : Boolean
-    }
+    },
     new_token_owner : Account,
     multisig : {
       multisig_use : Boolean,
