@@ -61,10 +61,9 @@ Account : 20 Bytes Ethereum account starting with '0x'
     num_locker : Number,
     locker_options : [
       {
-        no_vesting : Boolean, // just lock tokens
-        vesting : [ { vesting_stage: Time, vesting_amount: Number } ],
-        distribution: [ { account: String, ratio: Number } ],
-        ratio: Number
+        is_straight : Boolean, // locker_type : straight, variable
+        locking : [ { locking_stage: Time, locking_ratio: Number } ], //only take 1 for straight vesting locker (cliff time & ratio)
+        distribution: [ { account: String, ratio: Number } ]
       }
     ]
   }
