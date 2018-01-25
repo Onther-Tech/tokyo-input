@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist",
-    "test": "mocha --require babel-polyfill --compilers js:babel-register --reporter spec||exit 0",
+    "test": "mocha --require babel-polyfill --require babel-register --reporter spec||exit 0",
     "publish": "npm run build && npm publish",
     "publish:beta": "npm run build && npm publish --tag beta"
   },
