@@ -44,7 +44,7 @@ module.exports = Joi.object().keys({
     distribution: Joi.object().keys({
       token: Joi.array().items(
         Joi.object().keys({
-          token_holder: [Joi.string(), Account()], // TODO: both required?
+          token_holder: [Joi.string().valid("crowdsale", "locker"), Account()], // TODO: both required?
           token_ratio: Joi.number().required(),
         }),
       ).required(),
