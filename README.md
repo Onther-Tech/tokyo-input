@@ -8,6 +8,8 @@ Time : Human readable string without time zone considered (UTC). Only support `M
 Account : 20 Bytes Ethereum account starting with "0x"
 - eg) 0x5a0b54d5dc17e0aadc383d2db43b0a0d3e029c4c
 
+Uint : Unsigned Integer.
+
 ### Schema
 
 ```
@@ -30,6 +32,7 @@ Account : 20 Bytes Ethereum account starting with "0x"
     min_cap : Number, // decimals considered
     start_time : Time,
     end_time : Time,
+    bonus_coeff: 100, // value to calculate bonus rate. if bonus_coeff is 100, bonus is 10, then the bonus are 10%
     rate: {
       is_static: Boolean,
       base_rate: Number,

@@ -1,32 +1,34 @@
 import Joi from "./Joi";
 
-import { Account, Time } from "./types";
+import { Account, Time, Uint } from "./types";
 
+// TODO: use `when` to conditional verification
 module.exports = Joi.object().keys({
   token: Joi.object().keys({
     token_type: Joi.object().keys({
       is_minime: Joi.bool().required(),
-      token_option: Joi.object().keys({
-        burnable: Joi.bool().required(),
-        pausable: Joi.bool().required(),
-        vesting: Joi.bool().required(),
-      }),
     }).required(),
+    token_option: Joi.object().keys({
+      burnable: Joi.bool().required(),
+      pausable: Joi.bool().required(),
+      vesting: Joi.bool(),
+    }),
     token_name: Joi.string().required(),
     token_symbol: Joi.string().required(),
-    decimals: Joi.number().min(0).max(32).required(),
+    decimals: Uint().min(0).max(32).required(),
   }).required(),
   sale: Joi.object().keys({
-    max_cap: Joi.number().required(),
-    min_cap: Joi.number().required(),
+    max_cap: Uint().required(),
+    min_cap: Uint().required(),
     start_time: Time().required(),
     end_time: Time().required(),
     rate: Joi.object().keys({
       is_static: Joi.bool().required(),
-      base_rate: Joi.number().required(),
+      base_rate: Uint().required(),
       bonus: Joi.object().keys({
         use_time_bonus: Joi.bool().required(),
         use_amount_bonus: Joi.bool().required(),
+        bonus_coeff: Uint(),
         time_bonuses: Joi.array().items(
           Joi.object().keys({
             bonus_time_stage: Time().required(),

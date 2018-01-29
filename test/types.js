@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js";
-import { Account, Time } from "../src/lib/types";
+import { Account, Time, Uint } from "../src/lib/types";
 
 const should = require("chai")
   .use(require("chai-as-promised"))
@@ -24,6 +24,40 @@ describe("Basic Type", () => {
       const { error } = Time().validate(dateString);
 
       should.not.exist(error);
+    });
+  });
+
+  describe("Uint", () => {
+    it("should accept positive integer", () => {
+      const number = 10;
+
+      const { error } = Uint().validate(number);
+
+      should.not.exist(error);
+    });
+
+    it("should deny negative integer", () => {
+      const number = -10;
+
+      const { error } = Uint().validate(number);
+
+      should.exist(error);
+    });
+
+    it("should deny positive float", () => {
+      const number = 10.1;
+
+      const { error } = Uint().validate(number);
+
+      should.exist(error);
+    });
+
+    it("should deny negative float", () => {
+      const number = -10.2;
+
+      const { error } = Uint().validate(number);
+
+      should.exist(error);
     });
   });
 });
