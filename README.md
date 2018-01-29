@@ -3,7 +3,7 @@
 
 ### Types
 Time : Human readable string without time zone considered (UTC). Only support `MM/DD/YYYY HH:mm` format by moment.js. See [details](http://momentjs.com/docs/#/parsing/string-format/)
-- eg) 01/21/2018 09:30
+- eg) 01/21/2018 09:30:00
 
 Account : 20 Bytes Ethereum account starting with "0x"
 - eg) 0x5a0b54d5dc17e0aadc383d2db43b0a0d3e029c4c
@@ -47,13 +47,17 @@ Uint : `bignumber.js` compatible string for unsigned integer. Check the value wi
       token : [ { token_holder: "crowdsale" | "locker" | Account, token_ratio : Uint } ], // "crowdsale" must be inserted
       ether : [ { ether_holder: Account, ether_ratio : Number } ]
     },
+    stages: [ // Define sale stages seperated by times. independent cap could be considered.
+      {
+        start_time: Time,
+        end_time: Time,
+        independent_cap_ratio: Uint, // 0 for no seperated cap for the stage
+        kyc: Boolean // check kyc for this stage
+      }
+    ],
     valid_purchase: {
       max_purchase_limit : Uint, // ( 0 for no limit )
       min_purchase_limit : Uint  // ( 0 for no limit )
-    },
-    kyc: {
-      kyc_for_mainsale : Boolean,
-      kyc_for_presale : Boolean
     },
     new_token_owner : Account,
     multisig : {
@@ -62,7 +66,7 @@ Uint : `bignumber.js` compatible string for unsigned integer. Check the value wi
       multisig_owner : [ Account ]
     }
   },
-  locker : {
+  locker : { // Lock tokens and release them periodically (or linearly)
     use_locker : Boolean,
     num_locker : Number,
     locker_options : [

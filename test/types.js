@@ -1,4 +1,6 @@
+import moment from "moment";
 import BigNumber from "bignumber.js";
+
 import Joi from "../src/lib/Joi";
 import { Account, Time, Uint } from "../src/lib/types";
 
@@ -19,12 +21,18 @@ describe("Basic Type", () => {
   });
 
   describe("Time", () => {
+    const dateFormat = "MM/DD/YYYY HH:mm:ss";
     it("date format test", () => {
-      const dateString = "10/20/2017 04:30";
+      const dateString = "10/20/2017 04:30:20";
 
       const { error } = Time().validate(dateString);
 
       should.not.exist(error);
+
+      const momentValue = moment(dateString, dateFormat);
+
+      momentValue.format(dateFormat)
+        .should.be.equal(dateString);
     });
   });
 

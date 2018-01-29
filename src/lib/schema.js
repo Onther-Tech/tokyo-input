@@ -57,13 +57,15 @@ module.exports = Joi.object().keys({
         }),
       ).required(),
     }).required(),
+    stages: Joi.array().items(Joi.object().keys({
+      start_time: Time().required(),
+      end_time: Time().required(),
+      independent_cap_ratio: Joi.bignumber().uint().required(),
+      kyc: Joi.bool().required(),
+    })).required(),
     valid_purchase: Joi.object().keys({
       max_purchase_limit: Joi.bignumber().uint().required(),
       min_purchase_limit: Joi.bignumber().uint().required(),
-    }).required(),
-    kyc: Joi.object().keys({
-      kyc_for_mainsale: Joi.bool().required(),
-      kyc_for_presale: Joi.bool().required(),
     }).required(),
     new_token_owner: Account().required(),
     multisig: Joi.object().keys({
