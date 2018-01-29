@@ -1,4 +1,4 @@
-![Build](https://secure.travis-ci.org/Onther-Tech/tokyo-schema.png?branch=master,staging,production)
+[![Build Status][image]][travis-url]
 
 
 ### Types
@@ -23,11 +23,11 @@ Account : 20 Bytes Ethereum account starting with "0x"
     },
     token_name : String,
     token_symbol : String,
-    decimal : Number,
+    decimals : Number,
   },
   sale : {
-    max_cap : Number, // decimal considered
-    min_cap : Number, // decimal considered
+    max_cap : Number, // decimals considered
+    min_cap : Number, // decimals considered
     start_time : Time,
     end_time : Time,
     rate: {
@@ -73,3 +73,8 @@ Account : 20 Bytes Ethereum account starting with "0x"
   }
 }
 ```
+
+
+[image]: https://secure.travis-ci.org/Onther-Tech/tokyo-schema.png?branch=master
+
+[travis-url]: https://secure.travis-ci.org/Onther-Tech/tokyo-schema

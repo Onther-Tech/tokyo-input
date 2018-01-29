@@ -14,7 +14,7 @@ module.exports = Joi.object().keys({
     }).required(),
     token_name: Joi.string().required(),
     token_symbol: Joi.string().required(),
-    decimal: Joi.number().min(0).max(32).required(),
+    decimals: Joi.number().min(0).max(32).required(),
   }).required(),
   sale: Joi.object().keys({
     max_cap: Joi.number().required(),
