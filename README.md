@@ -8,7 +8,7 @@ Time : Human readable string without time zone considered (UTC). Only support `M
 Account : 20 Bytes Ethereum account starting with "0x"
 - eg) 0x5a0b54d5dc17e0aadc383d2db43b0a0d3e029c4c
 
-Uint : Unsigned Integer.
+Uint : `bignumber.js` compatible string for unsigned integer. Check the value with decimals
 
 ### Schema
 
@@ -28,28 +28,28 @@ Uint : Unsigned Integer.
     decimals : Number,
   },
   sale : {
-    max_cap : Number, // decimals considered
-    min_cap : Number, // decimals considered
+    max_cap : Uint, // decimals considered
+    min_cap : Uint, // decimals considered
     start_time : Time,
     end_time : Time,
-    bonus_coeff: 100, // value to calculate bonus rate. if bonus_coeff is 100, bonus is 10, then the bonus are 10%
+    bonus_coeff: Uint, // value to calculate bonus rate. if bonus_coeff is 100, bonus is 10, then the bonus are 10%
     rate: {
       is_static: Boolean,
-      base_rate: Number,
+      base_rate: Uint,
       bonus: { // only required for dynamic bonus
         use_time_bonus : Boolean,
         use_amount_bonus : Boolean,
-        time_bonuses : [ { bonus_time_stage: Time, bonus_time_ratio: Number } ],
-        amount_bonuses : [ { bonus_amount_stage: Number, bonus_amount_ratio: Number } ]
+        time_bonuses : [ { bonus_time_stage: Time, bonus_time_ratio: Uint } ],
+        amount_bonuses : [ { bonus_amount_stage: Uint, bonus_amount_ratio: Uint } ]
       }
     },
     distribution: {
-      token : [ { token_holder: "crowdsale" | "locker" | Account, token_ratio : Number } ], // index 0 item must be { account: "crowdsale", ratio: 0.80 }
+      token : [ { token_holder: "crowdsale" | "locker" | Account, token_ratio : Uint } ], // "crowdsale" must be inserted
       ether : [ { ether_holder: Account, ether_ratio : Number } ]
     },
     valid_purchase: {
-      max_purchase_limit : Number, // ( 0 for no limit )
-      min_purchase_limit : Number  // ( 0 for no limit )
+      max_purchase_limit : Uint, // ( 0 for no limit )
+      min_purchase_limit : Uint  // ( 0 for no limit )
     },
     kyc: {
       kyc_for_mainsale : Boolean,
@@ -68,11 +68,11 @@ Uint : Unsigned Integer.
     locker_options : [
       {
         is_straight : Boolean, // locking type : straight, variable
-        release : [ { relase_time: Time, release_ratio: Number } ], // A single release for simple locker (release time & 100% ratio)
-        distribution: [ { account: String, ratio: Number } ]
+        release : [ { relase_time: Time, release_ratio: Uint } ], // A single release for simple locker (a single release time & 100% of the token)
+        distribution: [ { account: String, ratio: Uint } ]
       }
     ],
-    ratio: Number // The ratio designated to this locker
+    ratio: Uint // The ratio designated to this locker
   }
 }
 ```

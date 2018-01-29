@@ -1,6 +1,5 @@
 import BaseJoi from "joi";
 import Extension from "joi-date-extensions";
+import BigNumberExtend from "./BigNumberExtend";
 
-const Joi = BaseJoi.extend(Extension);
-
-export default Joi;
+export default BaseJoi.extend(Extension).extend(BigNumberExtend);

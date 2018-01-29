@@ -1,4 +1,5 @@
 import BigNumber from "bignumber.js";
+import Joi from "../src/lib/Joi";
 import { Account, Time, Uint } from "../src/lib/types";
 
 const should = require("chai")
@@ -58,6 +59,18 @@ describe("Basic Type", () => {
       const { error } = Uint().validate(number);
 
       should.exist(error);
+    });
+  });
+
+  describe("Joi.string().bignumber()", () => {
+    const bnSchema = Joi.bignumber().uint();
+
+    it("should accept positive integer", () => {
+      const bnString = "100";
+
+      const { error } = Joi.validate(bnString, bnSchema);
+
+      should.not.exist(error);
     });
   });
 });
