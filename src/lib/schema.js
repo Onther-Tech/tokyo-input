@@ -22,13 +22,13 @@ module.exports = Joi.object().keys({
     min_cap: Joi.bignumber().uint().required(),
     start_time: Time().required(),
     end_time: Time().required(),
+    coeff: Joi.bignumber().uint().required(),
     rate: Joi.object().keys({
       is_static: Joi.bool().required(),
       base_rate: Joi.bignumber().uint().required(),
       bonus: Joi.object().keys({
         use_time_bonus: Joi.bool().required(),
         use_amount_bonus: Joi.bool().required(),
-        bonus_coeff: Joi.bignumber().uint(),
         time_bonuses: Joi.array().items(
           Joi.object().keys({
             bonus_time_stage: Time().required(),

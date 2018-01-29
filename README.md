@@ -32,7 +32,7 @@ Uint : `bignumber.js` compatible string for unsigned integer. Check the value wi
     min_cap : Uint, // decimals considered
     start_time : Time,
     end_time : Time,
-    bonus_coeff: Uint, // value to calculate bonus rate. if bonus_coeff is 100, bonus is 10, then the bonus are 10%
+    coeff: Uint, // base value to calculate ratio. if coeff is 1000, ratio value is 20, which means 20/1000 (2%)
     rate: {
       is_static: Boolean,
       base_rate: Uint,
