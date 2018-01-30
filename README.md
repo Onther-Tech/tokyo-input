@@ -57,7 +57,8 @@ Uint : `bignumber.js` compatible string for unsigned integer. Check the value wi
     ],
     valid_purchase: {
       max_purchase_limit : Uint, // ( 0 for no limit )
-      min_purchase_limit : Uint  // ( 0 for no limit )
+      min_purchase_limit : Uint, // ( 0 for no limit )
+      block_interval : Number    // ( 0 for no limit )
     },
     new_token_owner : Account,
     multisig : {

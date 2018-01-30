@@ -4,7 +4,9 @@ export default joi => ({
   base: joi.string(),
   name: "bignumber",
   language: {
-    bignumber: "needs to be bignumber integer convertible with bignumber.js",
+    uint: "needs to be bignumber integer convertible with bignumber.js",
+    min: "needs to be over {{q}}",
+    max: "needs to be under {{q}}",
   },
   pre(value, state, options) {
     return new BigNumber(value);
@@ -14,7 +16,37 @@ export default joi => ({
       name: "uint",
       validate(params, value, state, options) {
         if (!value.isInteger()) {
-          return this.createError("string.bignumber", { v: value }, state, options);
+          return this.createError("bignumber.uint", { v: value }, state, options);
+        }
+
+        return value;
+      },
+    },
+    {
+      name: "min",
+      params: {
+        q: joi.string(),
+      },
+      validate(params, value, state, options) {
+        const q = new BigNumber(params.q);
+
+        if (value.lt(q)) {
+          return this.createError("bignumber.min", { v: value, q }, state, options);
+        }
+
+        return value;
+      },
+    },
+    {
+      name: "max",
+      params: {
+        q: joi.string(),
+      },
+      validate(params, value, state, options) {
+        const q = new BigNumber(params.q);
+
+        if (value.gt(q)) {
+          return this.createError("bignumber.min", { v: value, q }, state, options);
         }
 
         return value;

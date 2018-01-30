@@ -45,7 +45,7 @@ describe("Basic Type", () => {
       should.not.exist(error);
     });
 
-    it("should deny negative integer", () => {
+    it("should reject negative integer", () => {
       const number = -10;
 
       const { error } = Uint().validate(number);
@@ -53,7 +53,7 @@ describe("Basic Type", () => {
       should.exist(error);
     });
 
-    it("should deny positive float", () => {
+    it("should reject positive float", () => {
       const number = 10.1;
 
       const { error } = Uint().validate(number);
@@ -61,7 +61,7 @@ describe("Basic Type", () => {
       should.exist(error);
     });
 
-    it("should deny negative float", () => {
+    it("should reject negative float", () => {
       const number = -10.2;
 
       const { error } = Uint().validate(number);
@@ -70,15 +70,83 @@ describe("Basic Type", () => {
     });
   });
 
-  describe("Joi.string().bignumber()", () => {
-    const bnSchema = Joi.bignumber().uint();
+  describe("Joi.bignumber()", () => {
+    describe("#uint", () => {
+      const bnSchema = Joi.bignumber().uint();
 
-    it("should accept positive integer", () => {
-      const bnString = "100";
+      it("should reject positive integer as Number", () => {
+        const bnString = 100;
 
-      const { error } = Joi.validate(bnString, bnSchema);
+        const { error } = Joi.validate(bnString, bnSchema);
 
-      should.not.exist(error);
+        should.exist(error);
+      });
+
+      it("should accept positive integer as string", () => {
+        const bnString = "100";
+
+        const { error } = Joi.validate(bnString, bnSchema);
+
+        should.not.exist(error);
+      });
+    });
+
+    describe("#min", () => {
+      it("should accept when value is same with the minimum", () => {
+        const bnSchema = Joi.bignumber().min("10");
+        const bnString = "10";
+
+        const { error } = Joi.validate(bnString, bnSchema);
+
+        should.not.exist(error);
+      });
+
+      it("should accept when value is over the minimum", () => {
+        const bnSchema = Joi.bignumber().min("10");
+        const bnString = "11";
+
+        const { error } = Joi.validate(bnString, bnSchema);
+
+        should.not.exist(error);
+      });
+
+      it("should reject when value is under the minimum", () => {
+        const bnSchema = Joi.bignumber().min("11");
+        const bnString = "10";
+
+        const { error } = Joi.validate(bnString, bnSchema);
+
+        should.exist(error);
+      });
+    });
+
+    describe("#max", () => {
+      it("should accept when value is same with the maximum", () => {
+        const bnSchema = Joi.bignumber().max("10");
+        const bnString = "10";
+
+        const { error } = Joi.validate(bnString, bnSchema);
+
+        should.not.exist(error);
+      });
+
+      it("should accept when value is over the maximum", () => {
+        const bnSchema = Joi.bignumber().max("11");
+        const bnString = "10";
+
+        const { error } = Joi.validate(bnString, bnSchema);
+
+        should.not.exist(error);
+      });
+
+      it("should reject when value is under the maximum", () => {
+        const bnSchema = Joi.bignumber().max("10");
+        const bnString = "11";
+
+        const { error } = Joi.validate(bnString, bnSchema);
+
+        should.exist(error);
+      });
     });
   });
 });

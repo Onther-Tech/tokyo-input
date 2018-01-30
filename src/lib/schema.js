@@ -66,6 +66,7 @@ module.exports = Joi.object().keys({
     valid_purchase: Joi.object().keys({
       max_purchase_limit: Joi.bignumber().uint().required(),
       min_purchase_limit: Joi.bignumber().uint().required(),
+      block_interval: Joi.number().integer().positive(),
     }).required(),
     new_token_owner: Account().required(),
     multisig: Joi.object().keys({
