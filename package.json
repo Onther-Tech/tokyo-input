@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist",
-    "test": "mocha --require babel-polyfill --require babel-register --reporter spec||exit 0"
+    "test": "mocha --require babel-polyfill --require babel-register --reporter spec||exit 0",
+    "test:watch": "mocha --require babel-polyfill --require babel-register --watch"
   },
   "repository": {
     "type": "git",
