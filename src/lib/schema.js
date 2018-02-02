@@ -60,7 +60,9 @@ module.exports = Joi.object().keys({
     stages: Joi.array().items(Joi.object().keys({
       start_time: Time().required(),
       end_time: Time().required(),
-      independent_cap_ratio: Joi.bignumber().uint().required(),
+      cap_ratio: Joi.bignumber().uint().required(),
+      max_purchase_limit: Joi.bignumber().uint().required(),
+      min_purchase_limit: Joi.bignumber().uint().required(),
       kyc: Joi.bool().required(),
     })).required(),
     valid_purchase: Joi.object().keys({
@@ -87,7 +89,7 @@ module.exports = Joi.object().keys({
             release_ratio: Joi.bignumber().uint().required(),
           }),
         ).required(),
-        distribution: Joi.array().items(
+        beneficiaries: Joi.array().items(
           Joi.object().keys({
             account: Joi.string().required(),
             ratio: Joi.bignumber().uint().required(),

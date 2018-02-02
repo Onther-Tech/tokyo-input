@@ -51,8 +51,10 @@ Uint : `bignumber.js` compatible string for unsigned integer. Check the value wi
       {
         start_time: Time,
         end_time: Time,
-        independent_cap_ratio: Uint, // 0 for no seperated cap for the stage
-        kyc: Boolean // check kyc for this stage
+        cap_ratio: Uint, // 0 for no seperated cap for the stage
+        min_purchase_limit: Uint, // 0 for no limit
+        max_purchase_limit: Uint, // 0 for no limit
+        kyc: Boolean, // check kyc for this stage
       }
     ],
     valid_purchase: {
@@ -74,10 +76,10 @@ Uint : `bignumber.js` compatible string for unsigned integer. Check the value wi
       {
         is_straight : Boolean, // locking type : straight, variable
         release : [ { relase_time: Time, release_ratio: Uint } ], // A single release for simple locker (a single release time & 100% of the token)
-        distribution: [ { account: String, ratio: Uint } ]
+        beneficiaries: [ { account: String, ratio: Uint } ], // token beneficiaries
+        ratio: Uint // The ratio designated to this locker
       }
     ],
-    ratio: Uint // The ratio designated to this locker
   }
 }
 ```
