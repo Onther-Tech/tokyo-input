@@ -21,9 +21,9 @@ describe("Basic Type", () => {
   });
 
   describe("Time", () => {
-    const dateFormat = "MM/DD/YYYY HH:mm:ss";
+    const dateFormat = "YYYY/MM/DD HH:mm:ss";
     it("date format test", () => {
-      const dateString = "10/20/2017 04:30:20";
+      const dateString = "2017/10/20 04:30:20";
 
       const { error } = Time().validate(dateString);
 

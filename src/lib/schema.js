@@ -29,33 +29,25 @@ module.exports = Joi.object().keys({
       bonus: Joi.object().keys({
         use_time_bonus: Joi.bool().required(),
         use_amount_bonus: Joi.bool().required(),
-        time_bonuses: Joi.array().items(
-          Joi.object().keys({
-            bonus_time_stage: Time().required(),
-            bonus_time_ratio: Joi.bignumber().uint().required(),
-          }),
-        ),
-        amount_bonuses: Joi.array().items(
-          Joi.object().keys({
-            bonus_amount_stage: Joi.bignumber().uint().required(),
-            bonus_amount_ratio: Joi.bignumber().uint().required(),
-          }),
-        ),
+        time_bonuses: Joi.array().items(Joi.object().keys({
+          bonus_time_stage: Time().required(),
+          bonus_time_ratio: Joi.bignumber().uint().required(),
+        })),
+        amount_bonuses: Joi.array().items(Joi.object().keys({
+          bonus_amount_stage: Joi.bignumber().uint().required(),
+          bonus_amount_ratio: Joi.bignumber().uint().required(),
+        })),
       }),
     }).required(),
     distribution: Joi.object().keys({
-      token: Joi.array().items(
-        Joi.object().keys({
-          token_holder: [Joi.string(), Account()], // TODO: both required?
-          token_ratio: Joi.bignumber().uint().required(),
-        }),
-      ).required(),
-      ether: Joi.array().items(
-        Joi.object().keys({
-          ether_holder: Account().required(),
-          ether_ratio: Joi.bignumber().uint().required(),
-        }),
-      ).required(),
+      token: Joi.array().items(Joi.object().keys({
+        token_holder: [Joi.string(), Account()], // TODO: both required?
+        token_ratio: Joi.bignumber().uint().required(),
+      })).required(),
+      ether: Joi.array().items(Joi.object().keys({
+        ether_holder: Account().required(),
+        ether_ratio: Joi.bignumber().uint().required(),
+      })).required(),
     }).required(),
     stages: Joi.array().items(Joi.object().keys({
       start_time: Time().required(),
@@ -79,24 +71,14 @@ module.exports = Joi.object().keys({
   }).required(),
   locker: Joi.object().keys({
     use_locker: Joi.bool().required(),
-    num_locker: Joi.number().min(0).required(),
-    locker_options: Joi.array().items(
-      Joi.object().keys({
-        is_straight: Joi.bool().required(),
-        release: Joi.array().items(
-          Joi.object().keys({
-            release_time: Time().required(),
-            release_ratio: Joi.bignumber().uint().required(),
-          }),
-        ).required(),
-        beneficiaries: Joi.array().items(
-          Joi.object().keys({
-            account: Joi.string().required(),
-            ratio: Joi.bignumber().uint().required(),
-          }).required(),
-        ),
-        ratio: Joi.bignumber().uint().required(),
-      }),
-    ),
+    beneficiaries: Joi.array().items(Joi.object().keys({
+      address: Account(), // TODO: multisig
+      ratio: Joi.bignumber().uint().required(),
+      is_straight: Joi.bool().required(),
+      release: Joi.array().items(Joi.object().keys({
+        release_time: Time().required(),
+        release_ratio: Joi.bignumber().uint().required(),
+      })).required(),
+    })),
   }).required(),
 }).required();

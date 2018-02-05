@@ -2,7 +2,7 @@
 
 
 ### Types
-Time : Human readable string without time zone considered (UTC). Only support `MM/DD/YYYY HH:mm` format by moment.js. See [details](http://momentjs.com/docs/#/parsing/string-format/)
+Time : Human readable string without time zone considered (UTC). Only support `YYYY/MM/DD HH:mm` format by moment.js. See [details](http://momentjs.com/docs/#/parsing/string-format/)
 - eg) 01/21/2018 09:30:00
 
 Account : 20 Bytes Ethereum account starting with "0x"
@@ -44,7 +44,7 @@ Uint : `bignumber.js` compatible string for unsigned integer. Check the value wi
       }
     },
     distribution: {
-      token : [ { token_holder: "crowdsale" | "locker" | Account, token_ratio : Uint } ], // "crowdsale" must be inserted
+      token : [ { token_holder: "crowdsale" | "locker", token_ratio : Uint } ], // "crowdsale" must be inserted
       ether : [ { ether_holder: Account, ether_ratio : Number } ]
     },
     stages: [ // Define sale stages seperated by times. independent cap could be considered.
@@ -71,15 +71,12 @@ Uint : `bignumber.js` compatible string for unsigned integer. Check the value wi
   },
   locker : { // Lock tokens and release them periodically (or linearly)
     use_locker : Boolean,
-    num_locker : Number,
-    locker_options : [
-      {
-        is_straight : Boolean, // locking type : straight, variable
-        release : [ { relase_time: Time, release_ratio: Uint } ], // A single release for simple locker (a single release time & 100% of the token)
-        beneficiaries: [ { account: String, ratio: Uint } ], // token beneficiaries
-        ratio: Uint // The ratio designated to this locker
-      }
-    ],
+    beneficiaries: [{
+      address: Account | Multisig, // token beneficiaries
+      ratio: Uint // The ratio designated to this beneficiary
+      is_straight : Boolean, // locking type : straight, variable
+      release : [ { relase_time: Time, release_ratio: Uint } ] // A single release for simple locker (a single release time & 100% of the token)
+    }]
   }
 }
 ```
