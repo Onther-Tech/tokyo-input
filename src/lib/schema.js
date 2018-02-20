@@ -4,6 +4,7 @@ import { Account, Time } from "./types";
 
 // TODO: use `when` to conditional verification
 module.exports = Joi.object().keys({
+  project_name: Joi.string().required(),
   token: Joi.object().keys({
     token_type: Joi.object().keys({
       is_minime: Joi.bool().required(),
