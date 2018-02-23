@@ -2,7 +2,6 @@ import moment from "moment";
 import BigNumber from "bignumber.js";
 
 import Joi from "../src/lib/Joi";
-import { Account, Time, Uint } from "../src/lib/types";
 
 const should = require("chai")
   .use(require("chai-as-promised"))
@@ -11,68 +10,48 @@ const should = require("chai")
 
 describe("Basic Type", () => {
   describe("Account", () => {
-    it("ethereum address test", () => {
-      const address = "0x557678cf28594495ef4b08a6447726f931f8d787";
+    it("#validAddress", () => {
+      const validAddresses = [
+        "0x557678cf28594495ef4b08a6447726f931f8d787",
+        "0x557678cf28594495ef4b08a6447726f931f8d784",
+      ];
 
-      const { error } = Account().validate(address);
+      const invalidAddresses = [
+        "0x557678cf28594495ef4b08a6447726f931f8d7871",
+        "0x557678cf28594495ef4b08a6447726f931f8d78",
+      ];
 
-      should.not.exist(error);
+      validAddresses.forEach((address) => {
+        const { error } = Joi.Account().validAddress().validate(address);
+
+        should.not.exist(error);
+      });
+
+      invalidAddresses.forEach((address) => {
+        const { error } = Joi.Account().validAddress().validate(address);
+
+        should.exist(error);
+      });
     });
   });
 
   describe("Time", () => {
     const dateFormat = "YYYY/MM/DD HH:mm:ss";
-    it("date format test", () => {
+    it("#format", () => {
       const dateString = "2017/10/20 04:30:20";
+      const unixTimeStamp = moment.utc(dateString).unix();
 
-      const { error } = Time().validate(dateString);
+      const { value, error } = Joi.Time().format().validate(dateString);
 
       should.not.exist(error);
 
-      const momentValue = moment(dateString, dateFormat);
-
-      momentValue.format(dateFormat)
-        .should.be.equal(dateString);
+      value.should.be.equal(unixTimeStamp);
     });
   });
 
-  describe("Uint", () => {
-    it("should accept positive integer", () => {
-      const number = 10;
-
-      const { error } = Uint().validate(number);
-
-      should.not.exist(error);
-    });
-
-    it("should reject negative integer", () => {
-      const number = -10;
-
-      const { error } = Uint().validate(number);
-
-      should.exist(error);
-    });
-
-    it("should reject positive float", () => {
-      const number = 10.1;
-
-      const { error } = Uint().validate(number);
-
-      should.exist(error);
-    });
-
-    it("should reject negative float", () => {
-      const number = -10.2;
-
-      const { error } = Uint().validate(number);
-
-      should.exist(error);
-    });
-  });
-
-  describe("Joi.bignumber()", () => {
+  describe("BigNumber", () => {
     describe("#uint", () => {
-      const bnSchema = Joi.bignumber().uint();
+      const bnSchema = Joi.BigNumber().uint();
 
       it("should reject positive integer as Number", () => {
         const bnString = 100;
@@ -93,7 +72,7 @@ describe("Basic Type", () => {
 
     describe("#min", () => {
       it("should accept when value is same with the minimum", () => {
-        const bnSchema = Joi.bignumber().min("10");
+        const bnSchema = Joi.BigNumber().min("10");
         const bnString = "10";
 
         const { error } = Joi.validate(bnString, bnSchema);
@@ -102,7 +81,7 @@ describe("Basic Type", () => {
       });
 
       it("should accept when value is over the minimum", () => {
-        const bnSchema = Joi.bignumber().min("10");
+        const bnSchema = Joi.BigNumber().min("10");
         const bnString = "11";
 
         const { error } = Joi.validate(bnString, bnSchema);
@@ -111,7 +90,7 @@ describe("Basic Type", () => {
       });
 
       it("should reject when value is under the minimum", () => {
-        const bnSchema = Joi.bignumber().min("11");
+        const bnSchema = Joi.BigNumber().min("11");
         const bnString = "10";
 
         const { error } = Joi.validate(bnString, bnSchema);
@@ -122,7 +101,7 @@ describe("Basic Type", () => {
 
     describe("#max", () => {
       it("should accept when value is same with the maximum", () => {
-        const bnSchema = Joi.bignumber().max("10");
+        const bnSchema = Joi.BigNumber().max("10");
         const bnString = "10";
 
         const { error } = Joi.validate(bnString, bnSchema);
@@ -131,7 +110,7 @@ describe("Basic Type", () => {
       });
 
       it("should accept when value is over the maximum", () => {
-        const bnSchema = Joi.bignumber().max("11");
+        const bnSchema = Joi.BigNumber().max("11");
         const bnString = "10";
 
         const { error } = Joi.validate(bnString, bnSchema);
@@ -140,7 +119,7 @@ describe("Basic Type", () => {
       });
 
       it("should reject when value is under the maximum", () => {
-        const bnSchema = Joi.bignumber().max("10");
+        const bnSchema = Joi.BigNumber().max("10");
         const bnString = "11";
 
         const { error } = Joi.validate(bnString, bnSchema);

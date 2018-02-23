@@ -10,6 +10,6 @@ const should = require("chai")
 
 describe("Utils", () => {
   describe("testValue", () => {
-    // body...
+
   });
 });
