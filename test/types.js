@@ -36,16 +36,22 @@ describe("Basic Type", () => {
   });
 
   describe("Time", () => {
-    const dateFormat = "YYYY/MM/DD HH:mm:ss";
     it("#utc", () => {
-      const dateString = "2017/10/20 04:30:20";
-      const unixTimeStamp = moment.utc(dateString).unix();
+      const validDateStrings = [
+        "2017/10/20 04:30:20",
+        "2017/01/20 04:30:20",
+        "2017/01/02 04:30:20",
+      ];
 
-      const { value, error } = Joi.Time().utc().validate(dateString);
+      validDateStrings.forEach((dateString) => {
+        const unixTimeStamp = moment.utc(dateString).unix();
 
-      should.not.exist(error);
+        const { value, error } = Joi.Time().utc().validate(dateString);
 
-      value.should.be.equal(unixTimeStamp);
+        should.not.exist(error);
+
+        value.should.be.equal(unixTimeStamp);
+      });
     });
   });
 
