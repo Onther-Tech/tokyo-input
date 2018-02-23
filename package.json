@@ -6,7 +6,8 @@
   "scripts": {
     "build": "babel src --out-dir dist",
     "test": "mocha --require babel-polyfill --require babel-register --reporter spec||exit 0",
-    "test:watch": "mocha --require babel-polyfill --require babel-register --watch"
+    "test:watch": "mocha --require babel-polyfill --require babel-register --watch",
+    "postinstall": "git submodule update --init"
   },
   "repository": {
     "type": "git",
