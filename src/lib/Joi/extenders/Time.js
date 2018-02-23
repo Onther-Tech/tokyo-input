@@ -14,7 +14,7 @@ export default joi => ({
         const momentValue = moment.utc(value, DATE_FORMAT);
 
         // check valid moment value & valid date format
-        if (!momentValue.isValid() || !moment(value, DATE_FORMAT).format(DATE_FORMAT) === value) {
+        if (!momentValue.isValid() || moment(value, DATE_FORMAT).format(DATE_FORMAT) !== value) {
           return this.createError("Time.utc", { v: value }, state, options);
         }
 
