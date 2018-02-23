@@ -37,11 +37,11 @@ describe("Basic Type", () => {
 
   describe("Time", () => {
     const dateFormat = "YYYY/MM/DD HH:mm:ss";
-    it("#format", () => {
+    it("#utc", () => {
       const dateString = "2017/10/20 04:30:20";
       const unixTimeStamp = moment.utc(dateString).unix();
 
-      const { value, error } = Joi.Time().format().validate(dateString);
+      const { value, error } = Joi.Time().utc().validate(dateString);
 
       should.not.exist(error);
 

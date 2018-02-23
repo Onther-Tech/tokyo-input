@@ -19,8 +19,8 @@ module.exports = Joi.object().keys({
   sale: Joi.object().keys({
     max_cap: Joi.BigNumber().uint().required(),
     min_cap: Joi.BigNumber().uint().required(),
-    start_time: Joi.Time().required(),
-    end_time: Joi.Time().required(),
+    start_time: Joi.Time().utc().required(),
+    end_time: Joi.Time().utc().required(),
     coeff: Joi.BigNumber().uint().required(),
     rate: Joi.object().keys({
       is_static: Joi.bool().required(),
@@ -29,7 +29,7 @@ module.exports = Joi.object().keys({
         use_time_bonus: Joi.bool().required(),
         use_amount_bonus: Joi.bool().required(),
         time_bonuses: Joi.array().items(Joi.object().keys({
-          bonus_time_stage: Joi.Time().required(),
+          bonus_time_stage: Joi.Time().utc().required(),
           bonus_time_ratio: Joi.BigNumber().uint().required(),
         })),
         amount_bonuses: Joi.array().items(Joi.object().keys({
@@ -49,8 +49,8 @@ module.exports = Joi.object().keys({
       })).required(),
     }).required(),
     stages: Joi.array().items(Joi.object().keys({
-      start_time: Joi.Time().required(),
-      end_time: Joi.Time().required(),
+      start_time: Joi.Time().utc().required(),
+      end_time: Joi.Time().utc().required(),
       cap_ratio: Joi.BigNumber().uint().required(),
       max_purchase_limit: Joi.BigNumber().uint().required(),
       min_purchase_limit: Joi.BigNumber().uint().required(),
@@ -75,7 +75,7 @@ module.exports = Joi.object().keys({
       ratio: Joi.BigNumber().uint().required(),
       is_straight: Joi.bool().required(),
       release: Joi.array().items(Joi.object().keys({
-        release_time: Joi.Time().required(),
+        release_time: Joi.Time().utc().required(),
         release_ratio: Joi.BigNumber().uint().required(),
       })).required(),
     })),
