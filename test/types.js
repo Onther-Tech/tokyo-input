@@ -70,9 +70,11 @@ describe("Basic Type", () => {
       it("should accept positive integer as string", () => {
         const bnString = "100";
 
-        const { error } = Joi.validate(bnString, bnSchema);
+        const { value, error } = Joi.validate(bnString, bnSchema);
 
         should.not.exist(error);
+        value.should.be.bignumber.equal(new BigNumber(bnString));
+        (value instanceof BigNumber).should.be.equal(true);
       });
     });
 
