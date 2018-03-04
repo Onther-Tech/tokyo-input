@@ -4,7 +4,7 @@
   "description": "Tokyo Project, Validate the user input schema",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel --presets env,stage-1 --out-dir dist src",
+    "build": "babel src -d dist",
     "test": "mocha --require babel-polyfill --require babel-register --reporter spec||exit 0",
     "test:watch": "mocha --require babel-polyfill --require babel-register --watch",
     "postinstall": "postinstall-build dist --script build"
@@ -24,12 +24,6 @@
   "dependencies": {
     "babel-register": "^6.26.0",
     "bignumber.js": "^5.0.0",
-    "chai": "^4.1.2",
-    "chai-as-promised": "^7.1.1",
-    "chai-bignumber": "^2.0.2",
-    "eslint": "^4.16.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
     "ethereumjs-util": "^5.1.4",
     "joi": "^13.1.1",
     "joi-date-extensions": "^1.1.0",
@@ -44,6 +38,12 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-1": "^6.24.1",
     "eslint-config-airbnb": "^16.1.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^2.0.2",
+    "eslint": "^4.16.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
     "tokyo-test-data": "file:submodules/tokyo-test-data"
   }
 }
