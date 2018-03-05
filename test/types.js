@@ -2,6 +2,7 @@ import moment from "moment";
 import BigNumber from "bignumber.js";
 
 import Joi from "../src/lib/Joi";
+import DATE_FORMAT from "../src/constants";
 
 const should = require("chai")
   .use(require("chai-as-promised"))
@@ -44,7 +45,7 @@ describe("Basic Type", () => {
       ];
 
       validDateStrings.forEach((dateString) => {
-        const unixTimeStamp = moment.utc(dateString).unix();
+        const unixTimeStamp = moment.utc(dateString, DATE_FORMAT).unix();
 
         const { value, error } = Joi.Time().utc().validate(dateString);
 

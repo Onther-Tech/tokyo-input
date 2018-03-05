@@ -42,10 +42,12 @@ module.exports = Joi.object().keys({
       token: Joi.array().items(Joi.object().keys({
         token_holder: [Joi.string(), Joi.Account()], // TODO: both required?
         token_ratio: Joi.BigNumber().uint().required(),
+        _comment: Joi.string(),
       })).required(),
       ether: Joi.array().items(Joi.object().keys({
         ether_holder: Joi.Account().required(),
         ether_ratio: Joi.BigNumber().uint().required(),
+        _comment: Joi.string(),
       })).required(),
     }).required(),
     stages: Joi.array().items(Joi.object().keys({
@@ -55,6 +57,7 @@ module.exports = Joi.object().keys({
       max_purchase_limit: Joi.BigNumber().uint().required(),
       min_purchase_limit: Joi.BigNumber().uint().required(),
       kyc: Joi.bool().required(),
+      _comment: Joi.string(),
     })).required(),
     valid_purchase: Joi.object().keys({
       max_purchase_limit: Joi.BigNumber().uint().required(),
@@ -62,11 +65,10 @@ module.exports = Joi.object().keys({
       block_interval: Joi.number().integer().positive(),
     }).required(),
     new_token_owner: Joi.Account().required(),
-    multisig: Joi.object().keys({
-      multisig_use: Joi.bool().required(),
-      num_multisig: Joi.number().min(0).max(10).required(),
-      multisig_owner: Joi.array().items(Joi.Account().required()).required(),
-    }).required(),
+  }).required(),
+  multisig: Joi.object().keys({
+    use_multisig: Joi.bool().required(),
+    owners: Joi.array().items(Joi.array().items(Joi.Account())).required(),
   }).required(),
   locker: Joi.object().keys({
     use_locker: Joi.bool().required(),

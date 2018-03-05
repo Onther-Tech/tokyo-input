@@ -8,12 +8,18 @@ const should = require("chai")
   .use(require("chai-bignumber")(BigNumber))
   .should();
 
+const sampleData1 = require("tokyo-test-data/sample1.json");
+const sampleData2 = require("tokyo-test-data/rbg.json");
+
 describe("Input Schema", () => {
   it("sample data 1", () => {
-    const data = require("tokyo-test-data/sample1.json");
-    const { value, error } = Joi.validate(data, schema);
+    const { error } = Joi.validate(sampleData1, schema);
 
-    (value.sale.coeff instanceof BigNumber).should.be.equal(true);
+    should.not.exist(error);
+  });
+
+  it("sample data 2", () => {
+    const { error } = Joi.validate(sampleData2, schema);
 
     should.not.exist(error);
   });
