@@ -67,7 +67,10 @@ module.exports = Joi.object().keys({
   }).required(),
   multisig: Joi.object().keys({
     use_multisig: Joi.bool().required(),
-    owners: Joi.array().items(Joi.array().items(Joi.Account())).required(),
+    infos: Joi.array().items(Joi.object().keys({
+      num_required: Joi.number().integer().required(),
+      owners: Joi.array().items(Joi.Account()).required(),
+    })).required(),
   }).required(),
   locker: Joi.object().keys({
     use_locker: Joi.bool().required(),
