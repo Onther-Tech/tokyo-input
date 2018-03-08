@@ -20,6 +20,8 @@ describe("Basic Type", () => {
       const invalidAddresses = [
         "0x557678cf28594495ef4b08a6447726f931f8d7871",
         "0x557678cf28594495ef4b08a6447726f931f8d78",
+        "some string",
+        "123123",
       ];
 
       validAddresses.forEach((address) => {
