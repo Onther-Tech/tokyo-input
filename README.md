@@ -41,9 +41,10 @@ Uint : __string__ parsed with `bignumber.js` for unsigned integer.
     coeff: Uint, 
 
     rate: {
-      is_static: Boolean,
-      base_rate: Uint,
-      bonus: { // only required for dynamic bonus
+      is_static: Boolean, // true if no bonus, false if dynamic rate
+      base_rate: Uint,    // rate without bonus. 
+                          // token amount = ether amount * rate
+      bonus: { // only required for dynamic rate with bonus
         use_time_bonus : Boolean,
         use_amount_bonus : Boolean,
 
