@@ -98,7 +98,7 @@ Uint : __string__ parsed with `bignumber.js` for unsigned integer.
     },
 
     // Define sale stages seperated by times.
-    // independent cap & kyc could be set.
+    // independent cap & kyc & max / min purchase limits could be set.
     stages: [ 
       {
         start_time: Time, // start time of stage
@@ -107,14 +107,19 @@ Uint : __string__ parsed with `bignumber.js` for unsigned integer.
                           // refund partial amount of ether
                           // if raised weia amount is over cap
         min_purchase_limit: Uint, // 0 for no limit, 
-        max_purchase_limit: Uint, // 0 for no limit
+                                  // reject token purchase 
+                                  // over this amount of ether
+        max_purchase_limit: Uint, // 0 for no limit,
+                                  // reject token purchase 
+                                  // under this amount of ether
         kyc: Boolean, // check kyc for this stage
       }
     ],
     valid_purchase: {
       max_purchase_limit : Uint, // ( 0 for no limit ) 
-                                 // reject token purchase 
-                                 // over this amount of ether
+                                 // limit purchaser from funding too many ether.
+                                 // this doesn't reject TX, but reduce msg.value to fit this limit
+                                 // and refund not-funded ether.
       min_purchase_limit : Uint, // ( 0 for no limit )
                                  // reject token purchase 
                                  // under this amount of ether
