@@ -1,7 +1,7 @@
 [![Build Status][image]][travis-url]
 
 ## Tokyo Schema
-> See examples at [here](./submodules/tokyo-test-data)
+> See examples at [here](https://github.com/Onther-Tech/tokyo-schema/tree/master/submodules)
 
 ### Types
 Time : Human readable string without time zone considered (UTC). Only support `YYYY/MM/DD HH:mm:ss` format.
@@ -35,14 +35,14 @@ Uint : __string__ parsed with `bignumber.js` for unsigned integer.
     min_cap : Uint, // decimals considered
     start_time : Time,
     end_time : Time,
-    
-    // base value to calculate ratio. 
+
+    // base value to calculate ratio.
     // if coeff is 1000, ratio value is 20, which means 20/1000 (2%)
-    coeff: Uint, 
+    coeff: Uint,
 
     rate: {
       is_static: Boolean, // true if no bonus, false if dynamic rate
-      base_rate: Uint,    // rate without bonus. 
+      base_rate: Uint,    // rate without bonus.
                           // token amount = ether amount * rate
       bonus: { // only required for dynamic rate with bonus
         use_time_bonus : Boolean,
@@ -57,7 +57,7 @@ Uint : __string__ parsed with `bignumber.js` for unsigned integer.
             bonus_time_ratio: Uint, // bonus rate
           }
         ],
-        amount_bonuses : [ 
+        amount_bonuses : [
           {
             bonus_amount_stage: Uint, // start amount of amount bonus
             bonus_amount_ratio: Uint, // bonus rate
@@ -66,11 +66,11 @@ Uint : __string__ parsed with `bignumber.js` for unsigned integer.
       }
     },
 
-    // after sale is finished, distribute ether and generate more tokens 
+    // after sale is finished, distribute ether and generate more tokens
     // to designated accounts
     distribution: {
       token : [
-        { 
+        {
           // `token_holder` can only 3 type of string as value.
           //  - "crowdsale": ratio of tokens purchaed by crowdsale contract.
           //     this ratio detemines the _final total supply_.
@@ -83,7 +83,7 @@ Uint : __string__ parsed with `bignumber.js` for unsigned integer.
           token_ratio : Uint
         }
       ],
-      
+
       // distribute Ether locked in vault.
       ether : [
         {
@@ -100,29 +100,29 @@ Uint : __string__ parsed with `bignumber.js` for unsigned integer.
 
     // Define sale stages seperated by times.
     // independent cap & kyc & max / min purchase limits could be set.
-    stages: [ 
+    stages: [
       {
         start_time: Time, // start time of stage
         end_time: Time,   // end time of stage
-        cap_ratio: Uint,  // 0 for no seperated cap for the stage. 
+        cap_ratio: Uint,  // 0 for no seperated cap for the stage.
                           // refund partial amount of ether
                           // if raised weia amount is over cap
-        min_purchase_limit: Uint, // 0 for no limit, 
-                                  // reject token purchase 
+        min_purchase_limit: Uint, // 0 for no limit,
+                                  // reject token purchase
                                   // over this amount of ether
         max_purchase_limit: Uint, // 0 for no limit,
-                                  // reject token purchase 
+                                  // reject token purchase
                                   // under this amount of ether
         kyc: Boolean, // check kyc for this stage
       }
     ],
     valid_purchase: {
-      max_purchase_limit : Uint, // ( 0 for no limit ) 
+      max_purchase_limit : Uint, // ( 0 for no limit )
                                  // limit purchaser from funding too many ether.
                                  // this doesn't reject TX, but reduce msg.value to fit this limit
                                  // and refund not-funded ether.
       min_purchase_limit : Uint, // ( 0 for no limit )
-                                 // reject token purchase 
+                                 // reject token purchase
                                  // under this amount of ether
       block_interval : Number    // ( 0 for no limit )
                                  // only accept token purchase
@@ -147,7 +147,7 @@ Uint : __string__ parsed with `bignumber.js` for unsigned integer.
 
   // Lock tokens and release them periodically (or linearly)
   // see more explanation: https://github.com/Onther-Tech/tokyo-reusable-crowdsale/blob/ac9656cca602465d1f2cf14f99e6edf5c0a98cf8/contracts/locker/Locker.sol#L11
-  locker : { 
+  locker : {
     use_locker : Boolean,
     beneficiaries: [{
       address: Account | Multisig, // token beneficiaries
