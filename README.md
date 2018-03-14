@@ -48,7 +48,7 @@ Uint : __string__ parsed with `bignumber.js` for unsigned integer.
         use_time_bonus : Boolean,
         use_amount_bonus : Boolean,
 
-        // gave additional bonus for time and ether amount.
+        // give additional bonus for time and ether amount.
         // bonus_time_stage should be sorted in ascending.
         // bonus_amount_stage should be sorted in descending.
         time_bonuses : [
